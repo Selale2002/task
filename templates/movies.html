@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Movies{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% for movie in movies %}
+        {% if movie['status'] == 'active' %}
+        <div class="col-md-4">
+            <div class="card mt-4">
+                <img src="{{ url_for('static', filename='images/' + movie['image']) }}" class="card-img-top" alt="{{ movie['name'] }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ movie['name']|title }}</h5>
+                    <p class="card-text">IMDB: {{ movie['imdb'] }}</p>
+                    <a href="{{ url_for('movie', movie_id=movie['id']) }}" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% for a in movies %}
+<h1>{{a.name}}</h1>
+<h4>{{a.year}}</h4>
+<h4>{{a.imdb}}</h4>
+<h4>{{a.producer}}</h4>
+<h4>{{a.status}}</h4>
+{% endfor %}
+{% endblock %}
